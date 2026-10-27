@@ -13,15 +13,22 @@ Implementation and analysis of a host-to-collector centralized logging pipeline 
 
 ## 1. Collector Socket Configuration
 Output of `sudo ss -ulpn | grep 514` on Legion:
-```text
+```
 UNCONN 0      0            0.0.0.0:514        0.0.0.0:*    users:(("rsyslogd",pid=11767,fd=5))
 UNCONN 0      0               [::]:514           [::]:*    users:(("rsyslogd",pid=11767,fd=6))
+```
 
-Captured via sudo tcpdump -ni enp52s0 udp port 514 -A -v on Legion during event dispatch:
+## 2. In-Transit Telemetry Capture
+ 
+Captured via` sudo tcpdump -ni enp52s0 udp port 514 -A -v` on Legion during event dispatch:
 
+```
 IP (tos 0x0, ttl 63, id 47749, offset 0, flags [DF], proto UDP (17), length 212)
     192.168.10.38.47065 > 192.168.20.135.514: SYSLOG, length: 184
     Facility authpriv (10), Severity alert (1)
     Msg: 1 2026-10-27T10:41:10.495422+04:00 localhost chigurh - - [timeQuality tzKnown="1" isSynced="1" syncAccuracy="119000"] SEC_INCIDENT_TEST: Unauthorized access detected from subnet 10
 E.....@.?.....
 &..........1.<81>1 2026-10-27T10:41:10.495422+04:00 localhost chigurh - - [timeQuality tzKnown="1" isSynced="1" syncAccuracy="119000"] SEC_INCIDENT_TEST: Unauthorized access detected from subnet 10
+
+```
+
