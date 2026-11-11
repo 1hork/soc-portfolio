@@ -22,7 +22,6 @@ Details:
 ```
 2026-11-11 11:12:45 Warning: Found some information disclosure in SMTP banner (OS or software name) [test:MAIL-8818] [details:-] [solution:-]
  
-2026-11-11 11:12:45 Warning: Found some information disclosure in SMTP banner (OS or software name) [test:MAIL-8818] [details:-] [solution:-]
 
 # Runtime modification
 sudo sysctl -w net.ipv4.conf.all.rp_filter=1
